@@ -3,6 +3,7 @@ package com.codeclan.bookingsystem.CourseBookingSystem.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,14 +22,15 @@ public class Course {
     @Column(name = "star_rating")
     private Double starRating;
 
-    @OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-    private List<Course> courses;
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    private List<Booking> bookings;
 
 
     public Course(String name, String town, Double starRating){
         this.name = name;
         this.town = town;
         this.starRating = starRating;
+        this.bookings = new ArrayList<>();
     }
 
     public Course(){
@@ -65,5 +67,13 @@ public class Course {
 
     public void setStarRating(Double starRating) {
         this.starRating = starRating;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

@@ -1,6 +1,7 @@
 package com.codeclan.bookingsystem.CourseBookingSystem.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,13 +20,14 @@ public class Customer {
     @Column(name = "age")
     private int age;
 
-    @OneToMany(mappedBy = "customers", fetch = FetchType.LAZY)
-    private List<Customer> customers;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)//what does this mean?
+    private List<Booking> bookings;
 
     public Customer(String name, String town, int age) {
         this.name = name;
         this.town = town;
         this.age = age;
+        this.bookings = new ArrayList<>();
     }
 
     public Customer(){
@@ -62,5 +64,13 @@ public class Customer {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }
